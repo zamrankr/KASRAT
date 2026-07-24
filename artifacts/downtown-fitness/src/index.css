@@ -10,26 +10,19 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
   --color-card-border: hsl(var(--card-border));
-
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-
   --font-sans: 'Inter', sans-serif;
   --font-bebas: 'Bebas Neue', sans-serif;
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -37,80 +30,70 @@
 }
 
 :root {
-  --background: 0 0% 4.3%; /* #0B0B0B */
+  --background: 0 0% 3%;
   --foreground: 0 0% 100%;
-  
-  --card: 0 0% 8.2%; /* #151515 */
+  --card: 0 0% 7%;
   --card-foreground: 0 0% 100%;
-  --card-border: 0 0% 15%;
-  
-  --popover: 0 0% 8.2%;
+  --card-border: 0 0% 13%;
+  --popover: 0 0% 7%;
   --popover-foreground: 0 0% 100%;
-  --popover-border: 0 0% 15%;
-  
-  --primary: 25 100% 50%; /* #FF6B00 */
-  --primary-foreground: 0 0% 100%;
-  
-  --secondary: 0 100% 62%; /* #FF3D3D */
-  --secondary-foreground: 0 0% 100%;
-  
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 82%; /* #D1D1D1 */
-  
-  --accent: 25 100% 50%;
-  --accent-foreground: 0 0% 100%;
-  
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 0 0% 100%;
-  
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
-  --ring: 25 100% 50%;
-  
-  --radius: 0.75rem;
-}
-
-.dark {
-  /* same since it's forced dark */
-  --background: 0 0% 4.3%;
-  --foreground: 0 0% 100%;
-  --card: 0 0% 8.2%;
-  --card-foreground: 0 0% 100%;
-  --card-border: 0 0% 15%;
-  --popover: 0 0% 8.2%;
-  --popover-foreground: 0 0% 100%;
-  --popover-border: 0 0% 15%;
+  --popover-border: 0 0% 13%;
   --primary: 25 100% 50%;
   --primary-foreground: 0 0% 100%;
   --secondary: 0 100% 62%;
   --secondary-foreground: 0 0% 100%;
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 82%;
+  --muted: 0 0% 13%;
+  --muted-foreground: 0 0% 75%;
   --accent: 25 100% 50%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
+  --border: 0 0% 13%;
+  --input: 0 0% 13%;
+  --ring: 25 100% 50%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 0 0% 3%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 100%;
+  --card-border: 0 0% 13%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 0 0% 100%;
+  --popover-border: 0 0% 13%;
+  --primary: 25 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 100% 62%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 13%;
+  --muted-foreground: 0 0% 75%;
+  --accent: 25 100% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 13%;
+  --input: 0 0% 13%;
   --ring: 25 100% 50%;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  
+  * { @apply border-border; }
   body {
     @apply font-sans antialiased bg-background text-foreground selection:bg-primary selection:text-white;
   }
-
   html {
     scroll-behavior: smooth;
   }
 }
 
 .glass {
-  @apply bg-white/5 backdrop-blur-md border border-white/10;
+  @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.06];
+}
+
+.glass-strong {
+  @apply bg-white/[0.08] backdrop-blur-xl border border-white/[0.1];
 }
 
 .text-gradient {
@@ -122,5 +105,96 @@
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 25px rgba(255, 107, 0, 0.4);
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
 }
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.section-panel {
+  @apply relative min-h-screen w-full flex items-center py-32;
+}
+
+.section-panel-alt {
+  @apply relative min-h-screen w-full flex items-center py-32 bg-[#050505];
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ray {
+  0% { opacity: 0; transform: rotate(-45deg) translateX(-100%); }
+  50% { opacity: 0.3; }
+  100% { opacity: 0; transform: rotate(-45deg) translateX(200%); }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #FF6B00 0%, #FF3D3D 50%, #FF6B00 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+  will-change: background-position;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  animation: grain 0.5s steps(4) infinite;
+  will-change: transform;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5px, -5px); }
+  20% { transform: translate(-10px, 5px); }
+  30% { transform: translate(5px, -10px); }
+  40% { transform: translate(-5px, 10px); }
+  50% { transform: translate(10px, 5px); }
+  60% { transform: translate(5px, -5px); }
+  70% { transform: translate(-10px, -5px); }
+  80% { transform: translate(10px, 10px); }
+  90% { transform: translate(-5px, 5px); }
+}
+
+.light-ray {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,107,0,0.03) 50%, transparent 70%);
+  animation: ray 8s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+

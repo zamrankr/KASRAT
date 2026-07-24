@@ -1,82 +1,62 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
-
-const faqs = [
-  {
-    q: "Do you offer personal training?",
-    a: "Yes, we offer 1-on-1 personal training sessions with certified experts tailored to your specific fitness goals."
-  },
-  {
-    q: "What are your operating hours?",
-    a: "Mon–Sat: 6AM–11PM, Sunday: 8AM–8PM. Premium members have 24/7 access to the facility."
-  },
-  {
-    q: "Do you have monthly memberships?",
-    a: "Yes, we offer flexible monthly, quarterly, and annual plans. No hidden fees or complicated contracts."
-  },
-  {
-    q: "Can beginners join?",
-    a: "Absolutely! We welcome all fitness levels. Our staff is always available to help you get started with the equipment."
-  },
-  {
-    q: "Is the gym air-conditioned?",
-    a: "Yes, the entire facility is fully air-conditioned and climate-controlled for your comfort during intense workouts."
-  },
-  {
-    q: "Do you have parking?",
-    a: "Yes, we provide free dedicated parking for all our members right outside the facility."
-  }
-];
+import { business } from '@/config/business';
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // First one open by default
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const sectionRef = useRef(null);
 
   return (
-    <section className="py-24 bg-[#080808]">
+    <section ref={sectionRef} className="section-panel-alt relative overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col lg:flex-row gap-16">
           <div className="lg:w-1/3">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
               className="sticky top-32"
             >
-              <h2 className="text-5xl md:text-7xl font-bebas uppercase tracking-wider mb-6">
-                Common <span className="text-primary">Questions</span>
+              <h2 className="text-5xl md:text-8xl font-bebas uppercase tracking-tight mb-6">
+                Common <span className="text-gradient">Questions</span>
               </h2>
-              <p className="text-muted-foreground text-lg mb-8">
-                Got questions? We've got answers. If you can't find what you're looking for, feel free to contact our team directly.
+              <p className="text-white/40 text-lg mb-8 font-light">
+                Everything you need to know before stepping in.
               </p>
-              <button 
+              <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-3 glass text-white font-bold tracking-widest text-sm uppercase rounded hover:bg-white/10 transition-colors border-white/20"
+                className="px-8 py-3 glass text-sm uppercase tracking-[0.2em] rounded-xl hover:bg-white/10 transition-colors font-semibold"
               >
                 Contact Us
               </button>
             </motion.div>
           </div>
 
-          <div className="lg:w-2/3 space-y-4">
-            {faqs.map((faq, index) => {
-              const isOpen = openIndex === index;
+          <div className="lg:w-2/3 space-y-3">
+            {business.faqs.map((faq, i) => {
+              const isOpen = openIndex === i;
               return (
-                <motion.div 
-                  key={index}
+                <motion.div
+                  key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`glass rounded-xl overflow-hidden transition-colors ${isOpen ? 'border-primary/50' : 'border-white/10'}`}
+                  transition={{ delay: i * 0.05, duration: 0.5 }}
+                  className={`rounded-xl border transition duration-300 ${
+                    isOpen ? 'bg-white/[0.03] border-primary/20' : 'bg-white/[0.01] border-white/[0.04]'
+                  }`}
                 >
                   <button
-                    className="w-full px-8 py-6 flex items-center justify-between text-left focus:outline-none"
-                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="w-full px-6 py-5 flex items-center justify-between text-left"
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
                   >
-                    <span className="text-lg font-bold pr-8">{faq.q}</span>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-primary text-white' : 'bg-white/5 text-white/50'}`}>
-                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                    <span className="text-sm font-medium pr-4">{faq.q}</span>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                      isOpen ? 'bg-primary/20 text-primary' : 'bg-white/[0.03] text-white/30'
+                    }`}>
+                      {isOpen ? <Minus size={13} /> : <Plus size={13} />}
                     </div>
                   </button>
                   <AnimatePresence>
@@ -87,7 +67,7 @@ export default function FAQ() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="px-8 pb-6 text-muted-foreground leading-relaxed">
+                        <div className="px-6 pb-5 text-sm text-white/40 leading-relaxed">
                           {faq.a}
                         </div>
                       </motion.div>

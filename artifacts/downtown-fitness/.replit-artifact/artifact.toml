@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "Downtown Fitness"
+title = "KASRAT"
 version = "1.0.0"
 id = "artifacts/downtown-fitness"
 router = "path"

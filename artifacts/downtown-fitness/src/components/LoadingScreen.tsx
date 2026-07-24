@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { business } from '@/config/business';
 
 export default function LoadingScreen({ isLoading }: { isLoading: boolean }) {
   return (
@@ -17,7 +18,8 @@ export default function LoadingScreen({ isLoading }: { isLoading: boolean }) {
               className="relative"
             >
               <div className="text-8xl font-bebas text-white tracking-wider flex items-center gap-2">
-                <span className="text-primary">D</span>F
+                <span className="text-primary">{business.shortName.charAt(0)}</span>
+                {business.shortName.slice(1)}
               </div>
             </motion.div>
             
@@ -28,7 +30,7 @@ export default function LoadingScreen({ isLoading }: { isLoading: boolean }) {
               className="mt-4 overflow-hidden"
             >
               <div className="font-bebas text-2xl tracking-[0.2em] text-muted-foreground">
-                DOWNTOWN FITNESS
+                {business.tagline.toUpperCase()}
               </div>
             </motion.div>
 

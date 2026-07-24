@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { business } from '@/config/business';
 
 export default function TermsOfService() {
   return (
@@ -13,12 +14,12 @@ export default function TermsOfService() {
           <div className="space-y-8 text-gray-300 leading-relaxed">
             <section>
               <h2 className="text-2xl font-bebas tracking-wider text-white mb-3">Membership</h2>
-              <p>Membership plans are subject to the terms agreed upon during sign-up. All fees are non-refundable unless stated otherwise. Downtown Fitness reserves the right to modify membership plans with prior notice.</p>
+              <p>Membership plans are subject to the terms agreed upon during sign-up. All fees are non-refundable unless stated otherwise. {business.name} reserves the right to modify membership plans with prior notice.</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bebas tracking-wider text-white mb-3">Facility Usage</h2>
-              <p>Members and guests must follow all gym rules and staff instructions. Downtown Fitness is not responsible for personal injuries or lost belongings. Proper athletic attire and footwear are required at all times.</p>
+              <p>Members and guests must follow all gym rules and staff instructions. {business.name} is not responsible for personal injuries or lost belongings. Proper athletic attire and footwear are required at all times.</p>
             </section>
 
             <section>
@@ -28,7 +29,7 @@ export default function TermsOfService() {
 
             <section>
               <h2 className="text-2xl font-bebas tracking-wider text-white mb-3">Liability</h2>
-              <p>Downtown Fitness is not liable for any injuries, damages, or losses incurred while using our facilities. Members use equipment and participate in activities at their own risk.</p>
+              <p>{business.name} is not liable for any injuries, damages, or losses incurred while using our facilities. Members use equipment and participate in activities at their own risk.</p>
             </section>
 
             <section>

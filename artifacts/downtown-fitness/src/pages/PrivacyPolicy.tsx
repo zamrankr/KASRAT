@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { business } from '@/config/business';
 
 export default function PrivacyPolicy() {
   return (
@@ -13,7 +14,7 @@ export default function PrivacyPolicy() {
           <div className="space-y-8 text-gray-300 leading-relaxed">
             <section>
               <h2 className="text-2xl font-bebas tracking-wider text-white mb-3">Information We Collect</h2>
-              <p>When you visit Downtown Fitness, we may collect personal information you provide directly, such as your name, phone number, and email address when you fill out our contact form or sign up for a membership.</p>
+              <p>When you visit {business.name}, we may collect personal information you provide directly, such as your name, phone number, and email address when you fill out our contact form or sign up for a membership.</p>
             </section>
 
             <section>
@@ -34,8 +35,8 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-2xl font-bebas tracking-wider text-white mb-3">Contact Us</h2>
               <p>If you have any questions about this Privacy Policy, please contact us at:<br />
-              Phone: 0322-0101444<br />
-              Address: 10 CC, Block A, Fazaia Housing Society, Lahore, Pakistan</p>
+              Phone: {business.phoneDisplay}<br />
+              Address: {business.locations.map(l => l.address).join(', ')}</p>
             </section>
           </div>
         </div>

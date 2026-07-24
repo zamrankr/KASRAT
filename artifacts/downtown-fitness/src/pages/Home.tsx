@@ -1,64 +1,49 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import LoadingScreen from '@/components/LoadingScreen';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Stats from '@/components/Stats';
+import About from '@/components/About';
 import WhyUs from '@/components/WhyUs';
 import Membership from '@/components/Membership';
 import Facilities from '@/components/Facilities';
-import Trainers from '@/components/Trainers';
-import Reviews from '@/components/Reviews';
-import Gallery from '@/components/Gallery';
-import BMICalculator from '@/components/BMICalculator';
-import FAQ from '@/components/FAQ';
-import Contact from '@/components/Contact';
+import People from '@/components/People';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
 import BackToTop from '@/components/BackToTop';
 import FloatingCTA from '@/components/FloatingCTA';
 
+const Gallery = lazy(() => import('@/components/Gallery'));
+const BMICalculator = lazy(() => import('@/components/BMICalculator'));
+const FAQ = lazy(() => import('@/components/FAQ'));
+const Contact = lazy(() => import('@/components/Contact'));
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 600);
+    const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (!loading) {
-      const hash = window.location.hash;
-      if (hash) {
-        setTimeout(() => {
-          const el = document.querySelector(hash);
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }, 200);
-      }
-    }
-  }, [loading]);
 
   return (
     <>
       <LoadingScreen isLoading={loading} />
-      
+      <div className="film-grain" />
       {!loading && (
-        <div className="bg-background min-h-screen text-foreground overflow-x-hidden">
+        <div className="bg-background min-h-screen text-foreground">
           <ScrollProgress />
           <Navbar />
           <main>
             <Hero />
-            <Stats />
+            <About />
             <WhyUs />
             <Membership />
             <Facilities />
-            <Trainers />
-            <Reviews />
-            <Gallery />
-            <BMICalculator />
-            <FAQ />
-            <Contact />
+            <People />
+            <Suspense fallback={<div className="h-screen" />}><Gallery /></Suspense>
+            <Suspense fallback={<div className="h-screen" />}><BMICalculator /></Suspense>
+            <Suspense fallback={<div className="h-screen" />}><FAQ /></Suspense>
+            <Suspense fallback={<div className="h-screen" />}><Contact /></Suspense>
           </main>
           <Footer />
           <BackToTop />

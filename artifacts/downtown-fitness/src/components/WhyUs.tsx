@@ -1,84 +1,57 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { business } from '@/config/business';
 import { UserCheck, Dumbbell, Tag, Maximize2, Heart, Zap, Activity, Users } from 'lucide-react';
 
-const features = [
-  { icon: UserCheck, title: 'Expert Coaching', desc: 'Certified coaches dedicated to fat loss, muscle gain, and real results.' },
-  { icon: Dumbbell, title: 'Modern Equipment', desc: 'Top-tier machines and free weights for every muscle group.' },
-  { icon: Tag, title: 'Affordable Memberships', desc: 'Premium fitness without the premium price tag.' },
-  { icon: Maximize2, title: 'Spacious Environment', desc: 'Never wait for a machine in our massive, well-equipped facility.' },
-  { icon: Heart, title: 'Cardio Zone', desc: 'State-of-the-art treadmills, bikes, and cardio equipment.' },
-  { icon: Zap, title: 'Strength Training', desc: 'Extensive free weights, barbells, and resistance machines.' },
-  { icon: Activity, title: 'Nutrition Coaching', desc: 'Personalised nutrition plans to fuel fat loss and muscle gain.' },
-  { icon: Users, title: 'Supportive Community', desc: 'Train alongside motivated people with real coaches backing you.' },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
+const iconMap: Record<string, any> = { UserCheck, Dumbbell, Tag, Maximize2, Heart, Zap, Activity, Users };
 
 export default function WhyUs() {
-  return (
-    <section className="py-24 bg-background relative" id="whyus">
-      {/* Background flare */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -translate-x-1/2" />
-      
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-bebas uppercase tracking-wider mb-4"
-          >
-            Why <span className="text-primary">Choose Us</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-lg"
-          >
-            We're more than just a gym. We're a facility engineered for results, providing you with everything you need to succeed.
-          </motion.p>
-        </div>
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+  return (
+    <section ref={sectionRef} className="relative min-h-screen w-full bg-[#050505] overflow-hidden flex items-center">
+      <div className="container mx-auto px-6 md:px-12">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-16"
         >
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+          <span className="text-[10px] uppercase tracking-[0.3em] text-primary/50 font-semibold">What Sets Us Apart</span>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bebas uppercase tracking-tight mt-2">
+            Engineered for<br />
+            <span className="text-gradient">Results</span>
+          </h2>
+        </motion.div>
+
+        <div className="space-y-0">
+          {business.features.map((feature, i) => {
+            const Icon = iconMap[feature.icon] || Dumbbell;
+            const isEven = i % 2 === 0;
             return (
-              <motion.div 
-                key={index}
-                variants={itemVariants}
-                className="glass p-8 rounded-2xl group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden"
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="group border-t border-white/[0.03] last:border-b"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-primary opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500 rounded-full" />
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <Icon className="text-primary" size={28} />
+                <div className="flex items-center gap-6 md:gap-10 py-6 md:py-8 hover:bg-white/[0.01] transition-colors px-4 md:px-8 -mx-4 md:-mx-8 rounded-lg">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/[0.06] flex items-center justify-center shrink-0 group-hover:bg-primary/[0.12] transition-colors">
+                    <Icon className="text-primary/60 group-hover:text-primary transition-colors" size={20} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg md:text-xl font-bebas tracking-wide">{feature.title}</h3>
+                    <p className="text-xs md:text-sm text-white/30 leading-relaxed mt-0.5">{feature.desc}</p>
+                  </div>
+                  <div className="text-white/10 text-sm font-mono hidden md:block">{(i + 1).toString().padStart(2, '0')}</div>
                 </div>
-                <h3 className="text-2xl font-bebas tracking-wide mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
