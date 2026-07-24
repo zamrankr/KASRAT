@@ -1,8 +1,8 @@
 {
   "framework": "vite",
-  "buildCommand": "cd Downtown-Fitness/artifacts/downtown-fitness && pnpm run build",
-  "outputDirectory": "Downtown-Fitness/artifacts/downtown-fitness/dist",
-  "installCommand": "cd Downtown-Fitness && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd artifacts/downtown-fitness && pnpm run build",
+  "outputDirectory": "artifacts/downtown-fitness/dist",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
     {
       "source": "/(.*)",
